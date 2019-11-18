@@ -12,11 +12,11 @@ public class CanvasClass extends SurfaceView implements SurfaceHolder.Callback
 {
     private SurfaceHolder surfaceHolder = null;
     private Paint paint = null;
-    private float circleX = 0;
-    private float circleY = 0;
+    private float Xloc = 0;
+    private float Yloc = 0;
     Random r = new Random();
-    public int xCoor = r.nextInt((1000 - 30) + 1) + 30;
-    public int yCoor = r.nextInt((1500 - 30) + 1) + 30;
+    public int xLoc = r.nextInt((1000 - 30) + 1) + 30;
+    public int yLoc = r.nextInt((1500 - 30) + 1) + 30;
 
     public CanvasClass(Context context) {
         super(context);
@@ -41,5 +41,21 @@ public class CanvasClass extends SurfaceView implements SurfaceHolder.Callback
     public void surfaceDestroyed(SurfaceHolder surfaceHolder) {
         paint = null;
 
+    }
+
+    public float getXLoc() {
+        return xLoc;
+    }
+
+    public void setXLoc(int xLoc) {
+        this.xLoc = xLoc;
+    }
+
+    public float getYLoc() {
+        return yLoc;
+    }
+
+    public void setYLoc(int yLoc) {
+        this.yLoc = yLoc;
     }
 }
