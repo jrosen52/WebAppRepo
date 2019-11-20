@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        setTitle("Web app");
+        setTitle("Play Screen");
 
         initControls();
         button = (Button) findViewById(R.id.button);
