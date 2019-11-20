@@ -2,6 +2,7 @@ package com.example.webapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.MotionEvent;
@@ -30,6 +31,13 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         button = (Button) findViewById(R.id.button);
         textView = (TextView) findViewById(R.id.textView);
         coors = (TextView) findViewById(R.id.coor);
+        Button scoreButton = findViewById(R.id.score_button);
+        scoreButton.setOnClickListener(new View.OnClickListener() {
+                                           @Override
+                                           public void onClick(View v) {
+                                               startActivity(new Intent(MainActivity.this, ScorePage.class));
+                                           }
+                                       });
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

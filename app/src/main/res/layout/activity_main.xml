@@ -42,4 +42,15 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"></LinearLayout>
 
+    <Button
+        android:text="@string/view_scores"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="158dp"
+        android:id="@+id/score_button"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textStyle="bold|italic" />
+
 </RelativeLayout>
