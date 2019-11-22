@@ -41,14 +41,16 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                customSurfaceView.gameStarted = true;
                 new CountDownTimer(30000, 1000) {
                     public void onTick(long millisUntilFinished) {
-                        textView.setText(String.valueOf(counter));
+                        textView.setText(String.valueOf(30-counter));
                         counter++;
                     }
 
                     public void onFinish() {
-                        textView.setText("FINISH!!");
+                        textView.setText("Done!");
+                        customSurfaceView.gameStarted = false;
                     }
                 }.start();
             }

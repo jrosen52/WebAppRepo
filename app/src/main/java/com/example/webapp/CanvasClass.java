@@ -9,15 +9,16 @@ import android.view.SurfaceView;
 
 import java.util.Random;
 
-public class CanvasClass extends SurfaceView implements SurfaceHolder.Callback
+public class CanvasClass extends SurfaceView implements Runnable
 {
     private SurfaceHolder surfaceHolder = null;
     private Paint paint = null;
-    private float Xloc = 0;
-    private float Yloc = 0;
     Random r = new Random();
-    public int xLoc = r.nextInt((1000 - 30) + 1) + 30;
-    public int yLoc = r.nextInt((1500 - 30) + 1) + 30;
+    public int xLoc;
+    public int yLoc;
+    long mFPS;
+    public boolean gameStarted = false;
+    public boolean targetAdded = false;
 
     public CanvasClass(Context context) {
         super(context);
@@ -29,22 +30,7 @@ public class CanvasClass extends SurfaceView implements SurfaceHolder.Callback
 
     }
 
-    @Override
-    public void surfaceCreated(SurfaceHolder surfaceHolder) {
-
-    }
-    @Override
-    public void surfaceChanged(SurfaceHolder surfaceHolder, int i, int i1, int i2) {
-
-    }
-
-    @Override
-    public void surfaceDestroyed(SurfaceHolder surfaceHolder) {
-        paint = null;
-
-    }
-
-    public void drawTarget()
+    public void drawTarget(int xTar,int yTar)
     {
         //Toast.makeText(getApplicationContext(), "X: " +xCoor + "Y: " + yCoor, Toast.LENGTH_SHORT).show();
         surfaceHolder = getHolder();
@@ -54,7 +40,7 @@ public class CanvasClass extends SurfaceView implements SurfaceHolder.Callback
 
         Paint surfaceBackground = new Paint();
         // Set the surfaceview background color.
-        surfaceBackground.setColor(Color.WHITE);
+        surfaceBackground.setColor(Color.BLUE);
         // Draw the surfaceview background color.
         canvas.drawRect(0, 0, this.getWidth(), this.getHeight(), surfaceBackground);
 
@@ -64,10 +50,33 @@ public class CanvasClass extends SurfaceView implements SurfaceHolder.Callback
         int rValue, bValue;
         paint.setARGB(255,255,0,0);
 
-        canvas.drawCircle(xLoc, yLoc, 80, paint);
+        canvas.drawCircle(xTar, yTar, 80, paint);
 
         // Unlock the canvas object and post the new draw.
         surfaceHolder.unlockCanvasAndPost(canvas);
+    }
+
+    @Override
+    public void run() {
+        while (gameStarted) {
+
+            long startFrameTime = System.currentTimeMillis();
+
+            if(targetAdded == false)
+            {
+                xLoc = r.nextInt((1000 - 30) + 1) + 30;
+                yLoc = r.nextInt((1500 - 30) + 1) + 30;
+                drawTarget(xLoc,yLoc);
+                targetAdded = true;
+            }
+
+            long timeThisFrame = System.currentTimeMillis() - startFrameTime;
+            if (timeThisFrame >= 1) {
+                mFPS = 1000 / timeThisFrame;
+            }
+
+        }
+
     }
 
     public float getXLoc() {

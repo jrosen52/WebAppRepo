@@ -3,4 +3,5 @@
     <string name="start_timer">start_timer</string>
     <string name="view_scores">View Scores</string>
     <string name="play_button">Return to Play Screen</string>
+    <string name="start">Start</string>
 </resources>
