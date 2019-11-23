@@ -19,6 +19,7 @@ public class CanvasClass extends SurfaceView implements Runnable
     long mFPS;
     public boolean gameStarted = false;
     public boolean targetAdded = false;
+    int score;
 
     public CanvasClass(Context context) {
         super(context);

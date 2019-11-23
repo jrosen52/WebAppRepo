@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     private TextView coors;
     private LinearLayout canvasLayout = null;
     CanvasClass customSurfaceView = null;
+    int score;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +52,10 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                     public void onFinish() {
                         textView.setText("Done!");
                         customSurfaceView.gameStarted = false;
+                        if(score > ScorePage.getHigh())
+                        {
+                            ScorePage.setHigh(score);
+                        }
                     }
                 }.start();
             }
@@ -86,4 +91,5 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
             return false;
         }
     }
+
 }

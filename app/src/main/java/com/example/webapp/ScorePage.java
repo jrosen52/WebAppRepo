@@ -5,12 +5,15 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 public class ScorePage extends AppCompatActivity
 {
     Button button;
+    static int curHigh;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -27,5 +30,18 @@ public class ScorePage extends AppCompatActivity
             }
         });
 
+        final TextView highScore = findViewById(R.id.high_score);
+        highScore.setText(curHigh);
+
+    }
+
+    static void setHigh(int set)
+    {
+        curHigh = set;
+    }
+
+    static int getHigh()
+    {
+        return curHigh;
     }
 }

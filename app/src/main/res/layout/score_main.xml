@@ -14,5 +14,26 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textStyle="bold|italic" />
 
+    <TextView
+        android:id="@+id/main_score_text"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="352dp"
+        android:layout_marginEnd="8dp"
+        android:text="Current High Score:"
+        android:textAlignment="center"
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/high_score"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="352dp"
+        android:layout_marginEnd="8dp"
+        android:textAlignment="center"
+        android:textSize="30sp"/>
+
 
 </LinearLayout>
