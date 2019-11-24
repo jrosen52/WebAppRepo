@@ -12,7 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class ScorePage extends AppCompatActivity
 {
     Button button;
-    static int curHigh;
+    static int curHigh = 0;
 
 
     @Override
@@ -31,7 +31,7 @@ public class ScorePage extends AppCompatActivity
         });
 
         final TextView highScore = findViewById(R.id.high_score);
-        highScore.setText(curHigh);
+        highScore.setText(String.valueOf(curHigh));
 
     }
 

@@ -33,6 +33,10 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         textView = (TextView) findViewById(R.id.textView);
         coors = (TextView) findViewById(R.id.coor);
         Button scoreButton = findViewById(R.id.score_button);
+
+        customSurfaceView = new CanvasClass(getApplicationContext());
+        customSurfaceView.setOnTouchListener(this);
+
         scoreButton.setOnClickListener(new View.OnClickListener() {
                                            @Override
                                            public void onClick(View v) {
