@@ -31,18 +31,19 @@ interface NetResponse
     void netResult(Integer code, JSONArray json);
 }
 
-public class MainActivity extends AppCompatActivity implements NetResponse {
-
-    NetTask netTask;
+//public class MainActivity extends AppCompatActivity implements NetResponse {
+public class MainActivity extends AppCompatActivity {
+    //NetTask netTask;
     public int counter;
     Button button;
     TextView textView;
     private TextView coors;
     private LinearLayout canvasLayout = null;
-    CanvasClass customSurfaceView = null;
+    CanvasClass CanvasView;
     int score;
     String updateString;
 
+    /*
     public void netResult(Integer code, JSONArray json)
     {
         System.out.println("Got a result from the web");
@@ -75,7 +76,7 @@ public class MainActivity extends AppCompatActivity implements NetResponse {
             });
         }
     }
-
+*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,28 +90,28 @@ public class MainActivity extends AppCompatActivity implements NetResponse {
         coors = (TextView) findViewById(R.id.coor);
         Button scoreButton = findViewById(R.id.score_button);
 
-        customSurfaceView = new CanvasClass(getApplicationContext());
-        customSurfaceView.setOnTouchListener(this);
-
+        CanvasView = new CanvasClass(getApplicationContext());
         scoreButton.setOnClickListener(new View.OnClickListener() {
                                            @Override
                                            public void onClick(View v) {
                                                startActivity(new Intent(MainActivity.this, ScorePage.class));
                                            }
                                        });
+
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                customSurfaceView.gameStarted = true;
+                CanvasView.gameStarted = true;
                 new CountDownTimer(30000, 1000) {
                     public void onTick(long millisUntilFinished) {
                         textView.setText(String.valueOf(30-counter));
                         counter++;
+                        //System.out.println("Game " + counter);
                     }
 
                     public void onFinish() {
                         textView.setText("Done!");
-                        customSurfaceView.gameStarted = false;
+                        CanvasView.gameStarted = false;
                         if(score > ScorePage.getHigh())
                         {
                             ScorePage.setHigh(score);
@@ -119,6 +120,19 @@ public class MainActivity extends AppCompatActivity implements NetResponse {
                 }.start();
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        //CanvasClass.resume();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        //CanvasClass.pause();
     }
 
     private void initControls()
@@ -130,6 +144,7 @@ public class MainActivity extends AppCompatActivity implements NetResponse {
         }
     }
 
+    /*
     @Override
     public boolean onTouch(View view, MotionEvent motionEvent) {
 
@@ -237,5 +252,5 @@ public class MainActivity extends AppCompatActivity implements NetResponse {
 
         }
     }
-
+*/
 }

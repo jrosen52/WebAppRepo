@@ -4,4 +4,5 @@
     <string name="view_scores">View Scores</string>
     <string name="play_button">Return to Play Screen</string>
     <string name="start">Start</string>
+    <color name="green">#66FF66</color>
 </resources>

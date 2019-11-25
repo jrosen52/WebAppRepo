@@ -4,13 +4,20 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.util.Log;
+import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Random;
 
+import static java.lang.Math.abs;
+
 public class CanvasClass extends SurfaceView implements Runnable
 {
+    Thread mGameThread = null;
     private SurfaceHolder surfaceHolder = null;
     private Paint paint = null;
     Random r = new Random();
@@ -20,15 +27,34 @@ public class CanvasClass extends SurfaceView implements Runnable
     public boolean gameStarted = false;
     public boolean targetAdded = false;
     int score;
+    int screenX, screenY;
+    TextView textView;
+
+    boolean mPaused = true;
 
     public CanvasClass(Context context) {
         super(context);
-
         surfaceHolder = getHolder();
 
         paint = new Paint();
         paint.setColor(Color.RED);
 
+    }
+
+    public void pause() {
+        gameStarted = false;
+        try {
+            mGameThread.join();
+        } catch (InterruptedException e) {
+            Log.e("Error:", "joining thread");
+        }
+
+    }
+
+    public void resume() {
+        gameStarted = true;
+        mGameThread = new Thread(this);
+        mGameThread.start();
     }
 
     public void drawTarget(int xTar,int yTar)
@@ -58,9 +84,37 @@ public class CanvasClass extends SurfaceView implements Runnable
     }
 
     @Override
-    public void run() {
-        while (gameStarted) {
+    public boolean onTouchEvent(MotionEvent motionEvent) {
 
+        switch (motionEvent.getAction() & MotionEvent.ACTION_MASK) {
+
+            case MotionEvent.ACTION_DOWN:
+
+                mPaused = false;
+                if(abs(motionEvent.getX() - xLoc) < 30 && abs(motionEvent.getY() - yLoc) < 30)
+                {
+                    score++;
+                    targetAdded=false;
+                }
+                else {
+
+                }
+
+                break;
+
+            case MotionEvent.ACTION_UP:
+
+                break;
+        }
+        return true;
+    }
+
+    @Override
+    public void run() {
+        System.out.println("This is Game");
+        while (gameStarted) {
+            //System.out.println("Game ");
+            System.out.println("This is Game");
             long startFrameTime = System.currentTimeMillis();
 
             if(targetAdded == false)
@@ -70,7 +124,6 @@ public class CanvasClass extends SurfaceView implements Runnable
                 drawTarget(xLoc,yLoc);
                 targetAdded = true;
             }
-
             long timeThisFrame = System.currentTimeMillis() - startFrameTime;
             if (timeThisFrame >= 1) {
                 mFPS = 1000 / timeThisFrame;
